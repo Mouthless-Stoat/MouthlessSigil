@@ -17,9 +17,14 @@ To install one of these sigils click on the file you want to download, we will u
 }
 ...
 ```
+
 The block contain the following:
   - The key to this block (in this case `Chungus`) will be the sigil name you can reference in your ruleset
   - The `description` field is the sigil description.
-  - The `author` field is use to credit the creator of the sigil.
+  - The `author` field is use to credit the creator of the sigil. Some sigil are in sub-directory, the sub-directory that the sigil is in is the author name
   - The `url` field is the link that you copy above and tell the game what file to download.
   - The `icon_url` field is the link to the sigil icon that the game will download.
+
+# Contribution
+
+If you are a dev and want to contribute sigil to this repository add your sigil into a sub directory with your name (or whatever you want to be refer to) along with any art you want. You may also include a `README.md` that contain note on installation along with any extra documentation you think your player would need.
