@@ -27,4 +27,4 @@ The block contain the following:
 
 # Contribution
 
-If you are a dev and want to contribute sigil to this repository add your sigil into a sub directory with your name (or whatever you want to be refer to) along with any art you want. You may also include a `README.md` that contain note on installation along with any extra documentation you think your player would need.
+If you are a dev and want to contribute sigil to this repository, add your sigil into a sub-directory with your name (or whatever you want to be refer to) along with anything extra you might want. You may also include a `README.md` that contain note on installation along with any extra documentation you think your player would need.
