@@ -4,7 +4,7 @@ Below are a short desciption of what each sigil do and how each one work
 
 ## [Detonator](./detonator.gd)
 
-Detonator but with customizable damage. Add a `detor_dmg` to your card to change the number, this is require
+Detonator but with customizable damage. Add a `detorDmg` to your card to change the number, this is require
 
 ## [Scry](./scry.gd)
 
@@ -20,4 +20,4 @@ Kill the card right after play
 
 ## [Unkillable](./unkillable.gd)
 
-Unkillable but card will gain power, Add a `buffAmount` to your card to change the buff amount, this require.
+Unkillable but card will gain power, Add a `unkillBuff` to your card to change the buff amount, this require.
