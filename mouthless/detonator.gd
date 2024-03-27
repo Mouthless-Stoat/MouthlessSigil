@@ -2,7 +2,7 @@ extends SigilEffect
 
 func handle_event(event: String, params: Array):
 	if event == "card_perished" and params[0] == card:
-        var dmg = card.card_data.detor_dmg
+		var dmg = card.card_data.detorDmg
 
 		var slotIdx = card.slot_idx()
 		
