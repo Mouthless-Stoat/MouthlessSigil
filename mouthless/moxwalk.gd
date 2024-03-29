@@ -2,13 +2,16 @@ extends SigilEffect
 
 func handle_event(event: String, params: Array):
 	if event == "card_hit" and params[1] == card and isFriendly:
-		var notMoxWalk = true
+		var moxwalk = false
 		for c in slotManager.all_friendly_cards():
-			if c.has_sigil("Green Mox") or c.has_sigil("Blue Mox") or c.has_sigil("Orange Mox"):
-				notMoxWalk = false
-				break
+			for sigil in c.card_data.moxwalk_sigil:
+				if c.has_sigil(sigil):
+					moxwalk = true
+					break
+            if moxwalk:
+                break
 		
-		if notMoxWalk: return
+		if not moxwalk: return
 		
 		# don't do any dmg to the opposing creature
 		var victim = params[0]
