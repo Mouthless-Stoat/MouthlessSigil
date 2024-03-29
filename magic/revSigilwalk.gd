@@ -4,7 +4,7 @@ func handle_event(event: String, params: Array):
 	if event == "card_hit" and params[1] == card and isFriendly:
 		var moxwalk = false
 		for c in slotManager.all_friendly_cards():
-			for sigil in c.card_data.moxwalk_sigil:
+			for sigil in c.card_data.sigilwalkSigils:
 				if c.has_sigil(sigil):
 					moxwalk = true
 					break

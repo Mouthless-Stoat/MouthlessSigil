@@ -1,23 +1,21 @@
 # Mouthless Custom Sigil
 
-Below are a short desciption of what each sigil do and how each one work
+Repository with all custom sigil that I made. They are sorted into different folder:
 
-## [Detonator](./detonator.gd)
+-   [`based`](./based/) contain inscryption sigil and improve version that are more customizable.
+-   [`magic`](./magic/) contain ported keyword from Magic the Gathering.
+-   [`extra`](./extra/) contain dependency that some sigil may need.
 
-Detonator but with customizable damage. Add a `detorDmg` to your card to change the number, this is require
+In those folder you can see specification on how to use them and all the documentation for each sigil. Below are a list of which sigil is where:
 
-## [Scry](./scry.gd)
-
-Similar to mtg scry. Add a `scryAmount` to your card to change the scrying amount, this is require. This siqil also require a dependency, you must also have this [file](./extra/movingButton.gd) download
-
-## [Gift Bearer](./giftBearer.gd)
-
-Gift Bearer bottom text
-
-## [Spell](./spell.gd)
-
-Kill the card right after play
-
-## [Unkillable](./unkillable.gd)
-
-Unkillable but card will gain power, Add a `unkillBuff` to your card to change the buff amount, this require.
+-   [`based`](./based/):
+    -   [`detonator`](./based/detonator.gd): Detonator but with customizable damage.
+    -   [`giftBearer`](./based/giftBearer.gd): Gift Bearer from Inscryption.
+    -   [`unkillable`](./based/unkillable.gd): Unkillable but with optional buff when respawn.
+-   [`magic`](./magic/):
+    -   [`lifelink`](./magic/lifelink.gd): Lifelink from Magic. Airborne but also deal damage to the card
+    -   [`sigilwalk`](./magic/sigilwalk.gd): Landwalk but for sigil. Airborne only when the opponent control a card with sigil.
+    -   [`revSigilwalk`](./magic/revSigilwalk.gd): Lankwalk but it only activate when you control the sigil.
+    -   [`spell`](./magic/spell.gd): Kill the card on summon
+    -   [`spellbook`](./magic/spellbook.gd): Spellbook from Magic Arena.
+    -   [`scry`](./magic/scry.gd): Scry from Magic. Let you look at the top N card and put them back in any order on top of your deck or the bottom.
