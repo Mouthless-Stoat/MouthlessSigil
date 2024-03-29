@@ -1,24 +1,22 @@
 extends SigilEffect
 
-var cardPrefab = preload("res://packed/A2Card.tscn")
-var buttonScript = load("user://scripts/%s_movingButton.gd" % CardInfo.ruleset) # expect the button dependency to be here
+var buttonScript = load("user://scripts/%s_button.gd" % CardInfo.ruleset) # expect the button dependency to be here
 
 func handle_event(event: String, params: Array):
 	if event == "card_summoned" and params[0] == card and isFriendly:
 		# check if the ui is already made to reuse
 		if notInit(): initUi()
-		initScry()
-		fightManager.get_node("scryScreen").visible = true
+		initSpell()
+		fightManager.get_node("spellbookScreen").visible = true
 
 func notInit() -> bool:
-	return not fightManager.has_node("scryScreen")
+	return not fightManager.has_node("spellbookScreen")
 	
 func initUi():
-
 	# copy the panel instead of making myself
 	var panel = fightManager.get_node("WaitingBlocker").duplicate()
 	panel.visible = true
-	panel.name = "scryScreen"
+	panel.name = "spellbookScreen"
 	
 	# because copy kill all the useless stuff
 	for child in panel.get_children():
@@ -28,19 +26,19 @@ func initUi():
 	# main ui box in the middle of the screen, mostly for bg
 	var box = Panel.new()
 	box.name = "mainBox"
-	box.set_size(Vector2(500, 1000))
+	box.set_size(Vector2(500, 800))
 	box.set_anchors_and_margins_preset(Control.PRESET_CENTER,Control.PRESET_MODE_KEEP_SIZE)
 	panel.add_child(box)
 	
 	# the v box thatg contain the text, list and done button
 	var vbox = VBoxContainer.new()
 	vbox.name = "vbox"
-	vbox.set_size(Vector2(500, 1000))
+	vbox.set_size(Vector2(500, 800))
 	box.add_child(vbox)
 	
 	# text at the top
 	var label = Label.new()
-	label.text = "Scrying..."
+	label.text = "Spellbook"
 	label.align = Label.ALIGN_CENTER
 	label.valign = Label.VALIGN_CENTER
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -55,60 +53,33 @@ func initUi():
 	cardVbox.name = "cardVbox"
 	cardVbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cardVbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	
-	var button = Button.new()
-	button.text = "Done"
-	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	button.connect("pressed", self, "close")
 
 	vbox.add_child(cardScroll)
 	cardScroll.add_child(cardVbox)
-	vbox.add_child(button)
 	
 	fightManager.add_child(panel)
 
-func close():
-	var cardVbox = fightManager.get_node("scryScreen/mainBox/vbox/scroll/cardVbox")
-	var topDeck = []
-	var botDeck = []
-	var reachBot = false
-	for child in cardVbox.get_children():
-		if child.name == "bottomDeck":
-			reachBot = true
-		
-		if reachBot:
-			botDeck.append(child.text)
-		else:
-			topDeck.append(child.text)
-		
-		cardVbox.remove_child(child)
-		child.queue_free()
+func select(button):
+	fightManager.get_node("spellbookScreen").visible = false
+	print(button.text)
+	fightManager.draw_card(button.text)
 	
-	fightManager.deck = topDeck + fightManager.deck + botDeck
-	fightManager.get_node("scryScreen").visible = false
+	var cardVbox = fightManager.get_node("spellbookScreen/mainBox/vbox/scroll/cardVbox")
+	
+	for card in cardVbox.get_children():
+		cardVbox.remove_child(card)
+		card.queue_free()
+	
 
-func initScry():
-	var cardVbox = fightManager.get_node("scryScreen/mainBox/vbox/scroll/cardVbox")
+func initSpell():
+	var cardVbox = fightManager.get_node("spellbookScreen/mainBox/vbox/scroll/cardVbox")
 	
 	var cardDisplay = Button.new()
 	cardDisplay.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cardDisplay.set_script(buttonScript)
-	
-	var scryCard = []
-	
-	for i in card.card_data.scryAmount:
-		scryCard.append(fightManager.deck.pop_front())
-		
-	print(scryCard)
-	
-	for card in scryCard:
+
+	for c in card.card_data.spellbook_card:
 		var nDisplay = cardDisplay.duplicate(7)
-		nDisplay.text = card
+		nDisplay.text = c
 		cardVbox.add_child(nDisplay)
-	
-	var bottomDeck = Button.new()
-	bottomDeck.name = "bottomDeck"
-	bottomDeck.text = "BOTTOM OF DECK"
-	bottomDeck.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	bottomDeck.set_script(buttonScript)
-	cardVbox.add_child(bottomDeck)
+		nDisplay.connect("attach", self, "select")
