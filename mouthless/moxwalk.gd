@@ -5,11 +5,11 @@ func handle_event(event: String, params: Array):
 		var moxwalk = false
 		for c in slotManager.all_friendly_cards():
 			for sigil in c.card_data.moxwalk_sigil:
-				if c.has_sigil(sigil):
-					moxwalk = true
-					break
-            if moxwalk:
-                break
+	if c.has_sigil(sigil):
+		moxwalk = true
+		break
+			if moxwalk:
+				break
 		
 		if not moxwalk: return
 		
