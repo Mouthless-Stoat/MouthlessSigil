@@ -19,3 +19,28 @@ In those folder you can see specification on how to use them and all the documen
     -   [`spell`](./magic/spell.gd): Kill the card on summon
     -   [`spellbook`](./magic/spellbook.gd): Spellbook from Magic Arena.
     -   [`scry`](./magic/scry.gd): Scry from Magic. Let you look at the top N card and put them back in any order on top of your deck or the bottom.
+
+# Installation
+
+## Sigil
+
+To download a sigil you can include a `custom_sigils` field in your ruleset file and fill it up like this:
+
+```json
+...
+    "custom_sigils": {
+        "Sigil Name": {
+            "description": "Description",
+            "author": "mouthless",
+            "url": "Link",
+            "icon_url": "Sigil Icon"
+        }
+    }
+...
+```
+
+You can replace `Sigil Name` with what you want to call the sigil, `Description` with your own description, you can obtain the `Link` by opening the file and select `raw`. You will have to supply the sigil icon yourself.
+
+## Dependency
+
+Some sigil require dependency most of these dependency are in the [`extra`](./extra/) folder. Dowloading these are like normal sigil but the sigil name need to be the same as the file name.
